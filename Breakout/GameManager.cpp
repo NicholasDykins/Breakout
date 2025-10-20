@@ -2,6 +2,7 @@
 #include "Ball.h"
 #include "PowerupManager.h"
 #include <iostream>
+#include "SoundManager.h"
 
 GameManager::GameManager(sf::RenderWindow* window)
     : _window(window), _paddle(nullptr), _ball(nullptr), _brickManager(nullptr), _powerupManager(nullptr),
@@ -13,6 +14,7 @@ GameManager::GameManager(sf::RenderWindow* window)
     _masterText.setPosition(50, 400);
     _masterText.setCharacterSize(48);
     _masterText.setFillColor(sf::Color::Yellow);
+
 }
 
 void GameManager::initialize()
@@ -26,6 +28,15 @@ void GameManager::initialize()
 
     // Create bricks
     _brickManager->createBricks(5, 10, 80.0f, 30.0f, 5.0f);
+
+    
+    _sfx = std::make_unique<SoundManager>();
+    
+    if (!_sfx->initiate()) 
+    {
+        
+    }
+
 }
 
 void GameManager::update(float dt)
@@ -77,9 +88,14 @@ void GameManager::update(float dt)
         _timeLastPowerupSpawned = _time;
     }
 
-    // move paddle
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) _paddle->moveRight(dt);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) _paddle->moveLeft(dt);
+    //// move paddle
+    //if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) _paddle->moveRight(dt);   //Using Mouse so not needed
+    //if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) _paddle->moveLeft(dt);
+
+
+
+
+
 
     // update everything 
     _paddle->update(dt);
@@ -115,3 +131,6 @@ UI* GameManager::getUI() const { return _ui; }
 Paddle* GameManager::getPaddle() const { return _paddle; }
 BrickManager* GameManager::getBrickManager() const { return _brickManager; }
 PowerupManager* GameManager::getPowerupManager() const { return _powerupManager; }
+
+
+GameManager::~GameManager() = default;

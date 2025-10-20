@@ -33,16 +33,36 @@ void Paddle::moveRight(float dt)
     }
 }
 
+
+
 void Paddle::update(float dt)
 {
     if (_timeInNewSize > 0)
     {
         _timeInNewSize -= dt;
     }
-    else
+    else if(_width != PADDLE_WIDTH)   // Changed to an else if so that it doesn't reset the size every frame
     {
         setWidth(1.0f, 0.0f); // Reset to default width after duration
     }
+
+
+    
+
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*_window);  //Get's mouse position on window
+
+    float currentX = _sprite.getPosition().x; //Trak the current x position of the paddle 
+
+    float posX = static_cast<float>(mousePosition.x) - (_width * 0.5f); //sets the x position of the paddle to the mouse position - half the width to centralise it
+
+    float lerpSpeed = 1.f;  //Speed that can be adjusted for smothing the movment
+
+    float newX = currentX + (posX - currentX) * lerpSpeed * dt;
+
+    posX = std::clamp(newX, 0.0f, static_cast<float>(_window->getSize().x) - _width); //clamps the position of the pad from moving outside of the visable window.
+ 
+    _sprite.setPosition(posX, _sprite.getPosition().y);    //Sets the sprite position to the mouse
+
 }
 
 void Paddle::render()

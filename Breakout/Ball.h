@@ -3,7 +3,7 @@
 
 
 class GameManager;  // forward declaration
-
+//class SoundManager;
 
 
 class Ball {
@@ -14,6 +14,9 @@ public:
     void render();
     void setVelocity(float coeff, float duration);
     void setFireBall(float duration);
+    bool flaming;
+
+    //void setSoundManager(SoundManager* s) { _sfx = s; }
 
 private:
     sf::CircleShape _sprite;
@@ -29,5 +32,7 @@ private:
 
     static constexpr float RADIUS = 10.0f;      
     static constexpr float VELOCITY = 350.0f;   // for reference.
+
+    //SoundManager* _sfx = nullptr;
 };
 

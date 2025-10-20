@@ -33,3 +33,17 @@ fire ball (green)
 
 # Time Details and Changelist
 <Add information to this section about the time you've taken for this task along with a professional changelist.>
+
+Resolved base-class undefined error caused by the include in PowerupBase.h for PowerupFireBall.h (15 min) 
+
+Bugs and code understanding, minor fixes and looking over the code to grasp the structure 1 hour 
+
+Features: 
+
+Controls: Mouse movment implemented and working 45 min 
+
+Visual Effects: Flickering fireball effect, and a visual change to the fireball powerup so that it is destinct 1 hour 20 min 
+
+Sound Implementation: Sounds for collision with walls the paddle and bricks, and a fire sound effect for the fireball power up. 3 hours
+
+Total 6 hours 20 minutes.
