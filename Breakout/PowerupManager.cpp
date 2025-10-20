@@ -61,16 +61,16 @@ void PowerupManager::spawnPowerup()
     switch (rand() % 5)
     {
     case 0:
-        _powerups.push_back(new PowerupFireBall(_window, _paddle, _ball));
+        _powerups.push_back(new PowerupBigPaddle(_window, _paddle, _ball));
         break;
     case 1:
-        _powerups.push_back(new PowerupFireBall(_window, _paddle, _ball));
+        _powerups.push_back(new PowerupSmallPaddle(_window, _paddle, _ball));
         break;
     case 2:
-        _powerups.push_back(new PowerupFireBall(_window, _paddle, _ball));
+        _powerups.push_back(new PowerupFastBall(_window, _paddle, _ball));
         break;
     case 3:
-        _powerups.push_back(new PowerupFireBall(_window, _paddle, _ball));
+        _powerups.push_back(new PowerupSlowBall(_window, _paddle, _ball));
         break;
     case 4:
         _powerups.push_back(new PowerupFireBall(_window, _paddle, _ball));
@@ -78,7 +78,6 @@ void PowerupManager::spawnPowerup()
     //case 5:  //This should not have been included as it will only ever get to between 0 and 4.
     //   break;
     }
-
 }
 
 void PowerupManager::checkCollision()
