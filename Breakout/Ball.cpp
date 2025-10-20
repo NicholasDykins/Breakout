@@ -62,9 +62,9 @@ void Ball::update(float dt)
 
         if ( _direction.x < 0 ||  _direction.x > 0)
         {
-            if (auto* sfx = _gameManager->getSFX())
+            if (auto* sfx = _gameManager->getSFX())   
             {
-                sfx->bounceWall();
+                sfx->bounceWall();                         //Play the bounce sound when the wall is hit
             }
         }
         _direction.x *= -1;
@@ -164,7 +164,7 @@ void Ball::setFireBall(float duration)
             _isFireBall = true;
             _timeWithPowerupEffect = duration;
 
-            if (auto* sfx = _gameManager->getSFX())
+            if (auto* sfx = _gameManager->getSFX())              //This block checks that the sound clip is not already playing to provent it overloading the voice that has 12 available slots, it only activates the sound at the start of the power up
             {
                 sfx->fireBallStart();
             }

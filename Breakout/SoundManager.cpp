@@ -8,7 +8,7 @@ bool SoundManager::initiate()
 {
 	bool ok = true;
 
-	ok &= _bufferWallBounce.loadFromFile("assets/sfx/boing-101318.wav");
+	ok &= _bufferWallBounce.loadFromFile("assets/sfx/boing-101318.wav");    //Checks for file loading
 
 	ok &= _bufferPaddleBounce.loadFromFile("assets/sfx/boing-101318.wav");
 
@@ -51,7 +51,7 @@ void SoundManager::bounceWall()
 {
 	auto& v = getFreeVoice();
 	v.setBuffer(_bufferWallBounce);
-	v.setPitch(randRange(_rng, 0.95f, 1.05f));  // slight variation feels nicer
+	v.setPitch(randRange(_rng, 0.95f, 1.05f));  // slight variation feels nicer and allows for a break in manotonis repeat sounds, not very aparent in this but in larger projects could be useful
 	v.play();
 }
 void SoundManager::bouncePaddle() 

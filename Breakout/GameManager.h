@@ -30,7 +30,10 @@ public:
     sf::Sound _bounce;
 
 
-    SoundManager* getSFX() const { return _sfx.get(); }
+    SoundManager* getSFX() const 
+    { 
+        return _sfx.get(); //returns the value of the sound efect in the sound manager to any function that calls it.
+    } 
 
     Paddle* getPaddle() const;
     BrickManager* getBrickManager() const;
