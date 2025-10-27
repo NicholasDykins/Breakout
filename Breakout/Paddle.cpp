@@ -11,6 +11,13 @@ Paddle::Paddle(sf::RenderWindow* window)
 
 Paddle::~Paddle()
 {
+
+}
+
+
+void Paddle::resetToCenter() //reset paddle to center of the screen
+{
+    _sprite.setPosition((_window->getSize().x - PADDLE_WIDTH) * 0.5f, _window->getSize().y - 50.f);
 }
 
 void Paddle::moveLeft(float dt)

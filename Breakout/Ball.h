@@ -18,6 +18,9 @@ public:
 
     //void setSoundManager(SoundManager* s) { _sfx = s; }
 
+
+    void reset();
+
 private:
     sf::CircleShape _sprite;
     sf::Vector2f _direction;

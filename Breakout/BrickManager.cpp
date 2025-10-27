@@ -30,6 +30,11 @@ void BrickManager::render()
     }
 }
 
+void BrickManager::clear()
+{
+    _bricks.clear();
+}
+
 int BrickManager::checkCollision(sf::CircleShape& ball, sf::Vector2f& direction)
 {
     int collisionResponse = 0;  // set to 1 for horizontal collision and 2 for vertical.

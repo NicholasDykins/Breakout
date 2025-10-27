@@ -26,6 +26,8 @@ public:
     int getPowerupsSpawned();
     std::pair<POWERUPS, float> getPowerupInEffect();
 
+    void clear();
+
 private:
     sf::RenderWindow* _window;
     Paddle* _paddle;

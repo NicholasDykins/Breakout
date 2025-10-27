@@ -16,6 +16,7 @@ public:
 	void updatePowerupText(std::pair<POWERUPS, float>);
 	void lifeLost(int lives);
 	void render();
+	void reLives(int lives);
 
 private:
 	GameManager* _gameManager;

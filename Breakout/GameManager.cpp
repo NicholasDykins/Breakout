@@ -39,69 +39,117 @@ void GameManager::initialize()
 
 }
 
+void GameManager::restartLevel()
+{
+    _levelComplete = false;
+    _masterText.setString("");
+
+    _powerupManager->clear();
+
+    _brickManager->clear();
+
+    _brickManager->createBricks(5, 10, 80.0f, 30.0f, 5.0f);
+
+    _paddle->resetToCenter();
+
+    //_ball->reset({ _paddle->getBounds().left + _paddle->getBounds().width * 0.5f, _paddle->getBounds().top - 40.f });
+    _ball->reset();
+
+    _time = 0.f;
+    _timeLastPowerupSpawned = 0.f;
+}
+
 void GameManager::update(float dt)
 {
     _powerupInEffect = _powerupManager->getPowerupInEffect();
     _ui->updatePowerupText(_powerupInEffect);
     _powerupInEffect.second -= dt;
-    
+
 
     if (_lives <= 0)
     {
-        _masterText.setString("Game over.");
+        _masterText.setString("Game Over — [R] Restart Game");
+
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) 
+        { 
+            restartLevel(); 
+            _lives = 3;
+            _ui->reLives(_lives);
+        }
         return;
     }
     if (_levelComplete)
     {
-        _masterText.setString("Level completed.");
+        _masterText.setString("Level completed — [R] Restart Game");
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+        {
+            restartLevel();
+            _lives = 3;
+            _ui->reLives(_lives);
+        }
         return;
     }
     // pause and pause handling
     if (_pauseHold > 0.f) _pauseHold -= dt;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::P) && _pauseHold <= 0.f) 
     {
-        if (!_pause && _pauseHold <= 0.f)
+        _pause = !_pause;
+        _pauseHold = PAUSE_TIME_BUFFER;
+        _masterText.setString(_pause ? "Paused — [R] Restart Level   [P] Resume" : "");
+    }
+
+
+    if (_pause) 
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) 
         {
-            _pause = true;
-            _masterText.setString("paused.");
-            _pauseHold = PAUSE_TIME_BUFFER;
-        }
-        if (_pause && _pauseHold <= 0.f)
-        {
+            restartLevel();
             _pause = false;
             _masterText.setString("");
-            _pauseHold = PAUSE_TIME_BUFFER;
+            _pauseHold = PAUSE_TIME_BUFFER; 
+            _lives = 3;
+            _ui->reLives(_lives);
         }
-    }
-    if (_pause)
-    {
         return;
     }
 
-    // timer.
-    _time += dt;
+
+        // timer.
+        _time += dt;
 
 
-    if (_time > _timeLastPowerupSpawned + POWERUP_FREQUENCY && rand()%700 == 0)      // TODO parameterise
+        if (_time > _timeLastPowerupSpawned + POWERUP_FREQUENCY && rand() % 700 == 0)      // TODO parameterise
+        {
+            _powerupManager->spawnPowerup();
+            _timeLastPowerupSpawned = _time;
+        }
+
+        //// move paddle
+        //if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) _paddle->moveRight(dt);   //Using Mouse so not needed
+        //if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) _paddle->moveLeft(dt);
+
+
+
+
+
+
+        // update everything 
+       
+    
+    else
     {
-        _powerupManager->spawnPowerup();
-        _timeLastPowerupSpawned = _time;
+        _paddle->update(dt);
+        _ball->update(dt);
+        _powerupManager->update(dt);
     }
-
-    //// move paddle
-    //if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) _paddle->moveRight(dt);   //Using Mouse so not needed
-    //if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) _paddle->moveLeft(dt);
-
-
-
-
-
-
-    // update everything 
-    _paddle->update(dt);
-    _ball->update(dt);
-    _powerupManager->update(dt);
 }
+
+
+
 
 void GameManager::loseLife()
 {
