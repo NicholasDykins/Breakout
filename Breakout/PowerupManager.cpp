@@ -64,29 +64,43 @@ void PowerupManager::render()
     }
 }
 
-void PowerupManager::spawnPowerup()
+void PowerupManager::spawnPowerupAt(POWERUPS type, const sf::Vector2f& pos)
 {
 
     // TODO finish this.
-    switch (rand() % 5)
+
+    PowerupBase* p = nullptr;
+
+
+    switch (type)
     {
-    case 0:
-        _powerups.push_back(new PowerupBigPaddle(_window, _paddle, _ball));
+    case bigPaddle:
+        p = new PowerupBigPaddle(_window, _paddle, _ball);
         break;
-    case 1:
-        _powerups.push_back(new PowerupSmallPaddle(_window, _paddle, _ball));
+    case smallPaddle:
+        p = new PowerupSmallPaddle(_window, _paddle, _ball);
         break;
-    case 2:
-        _powerups.push_back(new PowerupFastBall(_window, _paddle, _ball));
+    case fastBall:
+        p = new PowerupFastBall(_window, _paddle, _ball);
         break;
-    case 3:
-        _powerups.push_back(new PowerupSlowBall(_window, _paddle, _ball));
+    case slowBall:
+        p = new PowerupSlowBall(_window, _paddle, _ball);
         break;
-    case 4:
-        _powerups.push_back(new PowerupFireBall(_window, _paddle, _ball));
+    case fireBall:
+        p = new PowerupFireBall(_window, _paddle, _ball);
+        break;
+
+    default: 
         break;
     //case 5:  //This should not have been included as it will only ever get to between 0 and 4.
     //   break;
+    }
+
+    if (p) 
+    {
+        // need a setter to place it at the brick — next step
+        p->setPosition(pos);
+        _powerups.push_back(p);
     }
 }
 

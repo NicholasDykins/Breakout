@@ -52,3 +52,6 @@ const sf::Color extraBallEffectsColour = sf::Color(41, 110, 1); // metallic gree
 
 const sf::Color fireBallEffectColour = sf::Color(255, 126, 0);    //Base colour change for the fireball powerup
 
+
+constexpr float POWERUP_DROP_CHANCE = 0.15f;
+

@@ -24,6 +24,13 @@ public:
     void setAlive(bool alive);
     bool isAlive();
 
+    void spawnPowerupAt(POWERUPS type, const sf::Vector2f& pos);
+
+    void setPosition(const sf::Vector2f& p)
+    {
+        _sprite.setPosition(p);
+    }
+
 protected: // Protected so derived classes can access these members
     // Constants
     static constexpr float RADIUS = 20.f;               // size of powerup on screen

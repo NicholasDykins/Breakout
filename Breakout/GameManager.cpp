@@ -122,11 +122,11 @@ void GameManager::update(float dt)
         _time += dt;
 
 
-        if (_time > _timeLastPowerupSpawned + POWERUP_FREQUENCY && rand() % 700 == 0)      // TODO parameterise
-        {
-            _powerupManager->spawnPowerup();
-            _timeLastPowerupSpawned = _time;
-        }
+        //if (_time > _timeLastPowerupSpawned + POWERUP_FREQUENCY && rand() % 700 == 0)      // TODO parameterise
+        //{
+        //    //_powerupManager->spawnPowerup();
+        //   //_timeLastPowerupSpawned = _time;
+        //}
 
         //// move paddle
         //if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) _paddle->moveRight(dt);   //Using Mouse so not needed
@@ -140,12 +140,12 @@ void GameManager::update(float dt)
         // update everything 
        
     
-    else
-    {
+    //else
+    //{
         _paddle->update(dt);
         _ball->update(dt);
         _powerupManager->update(dt);
-    }
+    //}
 }
 
 

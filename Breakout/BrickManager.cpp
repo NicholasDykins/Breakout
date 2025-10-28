@@ -54,6 +54,34 @@ int BrickManager::checkCollision(sf::CircleShape& ball, sf::Vector2f& direction)
         // Mark the brick as destroyed (for simplicity, let's just remove it from rendering)
         // In a complete implementation, you would set an _isDestroyed flag or remove it from the vector
         brick = _bricks.back();
+
+        sf::FloatRect r = brickBounds;
+
+        sf::Vector2f center{r.left + r.width * 0.5f, r.top + r.height * 0.5f};
+     
+        float chance = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+
+        if (chance < POWERUP_DROP_CHANCE) {
+  
+            POWERUPS type;
+            switch (rand() % 5) 
+            {
+
+            case 0: type = bigPaddle;  break;
+
+            case 1: type = smallPaddle; break;
+
+            case 2: type = fastBall;   break;
+
+            case 3: type = slowBall;   break;
+
+            default:type = fireBall;   break;
+            }
+            _gameManager->getPowerupManager()->spawnPowerupAt(type, center);
+        }
+
+
+
         _bricks.pop_back();
         break;
     }
