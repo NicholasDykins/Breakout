@@ -68,7 +68,7 @@ void GameManager::update(float dt)
 
     if (_lives <= 0)
     {
-        _masterText.setString("Game Over — [R] Restart Game");
+        _masterText.setString("Game Over                  [R] Restart Game");
 
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) 
@@ -81,7 +81,7 @@ void GameManager::update(float dt)
     }
     if (_levelComplete)
     {
-        _masterText.setString("Level completed — [R] Restart Game");
+        _masterText.setString("Level completed            [R] Restart Game");
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
         {
@@ -99,7 +99,7 @@ void GameManager::update(float dt)
     {
         _pause = !_pause;
         _pauseHold = PAUSE_TIME_BUFFER;
-        _masterText.setString(_pause ? "Paused — [R] Restart Level   [P] Resume" : "");
+        _masterText.setString(_pause ? "[R] Restart Level            Paused           [P] Resume" : "");
     }
 
 
